@@ -132,14 +132,13 @@
                 </div>
             </div>
         </div>
-        <div onclick="close()">I am close NEW </div>
+        <button onclick="myFunction()">Click me</button>
+        <script>
+            function myFunction() {
+              alert("A")
+            }
+        </script>
         <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-        function close(){
-            aler("A")
-            window.parent.postMessage("CLOSE_PAYMENT_IFRAME", '*');
-        }
-        </script>
     </body>
 </html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Card Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Inter";
+            margin: 0;
+        }
+        :root{
+            font-size: 16px;
+        }
+
+        body {
+            font-family: "Inter";
+            margin: 0;
+            height: calc(100vh - 30px);
+        }
+        .hide-scrollbar {
+	    width: 100%;
+		height: 100vh;
+        -ms-overflow-style: none;  /* IE and Edge */
+		overflow-y: scroll;
+		scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+            width: 0px;
+            height: 0px;
+        }
+        .refyne-container {
+            display: flex;
+            justify-content: center;
+        }
+        .image-container {
+            position: relative;
+            background: #EAF6FC;
+            width: 100%;
+            height: 50vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border-bottom-right-radius: 65px;
+            border-bottom-left-radius: 65px;
+            padding: 18px 0px 10px 0px;
+        }
+        .main-container {
+            width: 40%;
+        }
+        .item-cross {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .card-image {
+            height: 80%;
+        }
+
+        .card-details {
+            position: relative;
+            padding: 20px 5px;
+        }
+
+        .textbox {
+            border: none;
+            width: 100%;
+        }
+
+        .expiryDate {
+            border: none;
+            width: 100%;
+        }
+
+        .end-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .cvv {
+            width: 100%;
+            position: relative;
+            background: #F3F3F5;
+            box-sizing: border-box;
+            border-radius: 8px;
+            height: 50px;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 450;
+            font-size: 16px;
+            line-height: 18px;
+            letter-spacing: 10px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 1px;
+            color: #55536B;
+            display: inline-block;
+        }
+
+        .cvv::placeholder{
+            color: #55536B;
+        }
+
+        img {
+            float: right;
+        }
+
+        small:hover, .card-details > img:hover, .card-cvv > img:hover, .card-expiry > img:hover, .item-cross {
+            cursor: pointer;
+        }
+
+        .copy-text {
+            position: absolute;
+            right: 20px;
+            bottom: 5px;
+        }
+
+        .card-expiry, .card-cvv{
+            width: 50%;
+            position: relative;
+        }
+		/*.card-cvv{
+			width: 10%;
+            position: relative;
+			float:right;
+			
+		}*/
+
+        input {
+            display: block;
+            height: 50px;
+            letter-spacing: 1px;
+            overflow: hidden;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            background: #F3F3F5;
+            font-family:  "Inter";
+            letter-spacing: 1px;
+            color: rgba(0, 0, 0, 0.7);
+            resize: vertical;
+            font-style:  normal;
+            font-size: 16px;
+            font-weight: 600;
+            padding-left: 15px;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        @media all and (min-width: 769px) and (max-width: 1200px) {
+            .main-container {
+                width: 50%;
+            }
+            .card-image {
+                height: 80%;
+            }
+            .counter-container{
+                position: relative;
+            }
+            .details-container{
+                padding: 25px 10px;
+            }
+        }
+
+        @media all and (min-width: 577px) and (max-width: 768px) {
+            .main-container {
+                width: 50%;
+            }
+            
+            .card-image {
+                height: 80%;
+            }
+            .counter-container{
+                position: fixed;
+            }
+            .details-container{
+                padding: 20px 10px;
+            }
+        }
+
+        @media all and (max-width: 576px) {
+            .main-container {
+                width: 100%
+            }
+            .card-image {
+                height: 80%;
+            }
+            .counter-container{
+                position: fixed;
+            }
+            .details-container{
+                padding: 25px 10px;
+            }
+        }
+
+        @media all and (max-width: 300px) {
+            .main-container {
+                width: 100%
+            }
+            .details-container {
+                padding: 20px 10px;
+            }
+            .counter-container{
+                position: relative;
+            }
+        }
+
+        label{
+            padding-top: 1px;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            margin-bottom: 3px;
+            font-family:  "Inter";
+            font-style:  normal;
+            color:  #55536B;
+        }
+
+        .copy{
+            position: relative;
+            float:right;
+            right: 15px;
+            top:10px;
+        }
+        .copy-cvv{
+            /*display: block;*/
+            background: transparent;
+            position: absolute;
+            float:right;
+            right: 5px;
+            top:39px;
+        }
+        .cvv-lock-wrapper {
+            position: relative;
+        }
+        .cvv-lock{
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+        .copy-text{
+            font-family:"Inter";
+            font-style: normal;
+            font-size: 12px;
+            line-height: 12px;
+            float: right;
+            position: relative;
+            color: #022BFF;
+            left: 0px;
+            top:32px;
+        }
+        .counter-container {
+			position:fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            /*height: 30px;*/
+            color: rgba(0, 0, 0, 0.56);
+            font-size: 12px;
+            line-height: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+            background: #f6f6f6;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="refyne-container">
+        <div class="main-container hide-scrollbar">
+            <div class="image-container">
+                <img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/card-people.svg" alt="Refyne Card" width="80%"/>
+            </div>
+            <div class="details-container">
+                <div class="cardnumber-container card-details">
+                    <label for="cardnumber">Card number</label>
+                    <a href="javascript:copyTextFromElement('cardNumber')" class="copy" href="#"><img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/copy.svg" alt="copy" class="copy-text"></a>
+                    <input type="text" id="cardNumber" class="cardnumber textbox" name="cardnumber" placeholder="Card Number" value="{{spaceCardNumber}}" onkeypress="return isNumber(event)" disabled>
+                </div>
+                <div class="username-container card-details">
+                    <label for="username">Name on card</label>
+                    <a href="javascript:copyTextFromElement('cardHolderName')" class="copy" href="#"><img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/copy.svg" alt="copy" class="copy-text"></a>
+                    <input type="text" id="cardHolderName" class="username textbox" name="Card Holder" placeholder="Card Holder" value="{{nameOnCard}}" disabled>
+                </div>
+                <div class="end-container card-details">
+                    <div class="card-expiry" style="padding-right: 20px;">
+                        <label for="expiryDate">Expiry date</label>
+                        <a href="javascript:copyTextFromElement('expiryDate')" class="copy" href="#"><img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/copy.svg" alt="copy" class="copy-text"></a>
+                        <input type="text" id="expiryDate" class="expiryDate" name="expiryDate" placeholder="MM/YY" value="{{modifiedExpiryDate}}" onkeypress="return isNumber(event)" disabled>
+                    </div>
+                    <div class="card-cvv">
+                        <label for="cvv">CVV</label>
+                        <div class="cvv-lock-wrapper">
+                            <input type="text" id="cvvLock" class="cvv" name="cvv" placeholder="***" disabled>
+                            <input type="text" id="cvvUnlock" class="cvv" name="CVV" value="{{cvv}}" style="display: none" onkeypress="return isNumber(event)" disabled>
+                            <a href="javascript:lockView()" class="cvv-lock" id="lock"><img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/lock.svg" alt="Lock Image"></a>
+                            <a href="javascript:unlockView()" class="cvv-lock" id="unLock" style="display: none"><img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/lock.svg" alt="Un-Lock Image"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    //Number Validation
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+    function informParentToCloseWindow() {
+        window.parent.postMessage("CLOSE_PAYMENT_IFRAME", '*');
+    }
+    //Timer Process
+    let timeOutFunction;
+    let countDownTimer;
+    let setCountDown = function () {
+		var timeOut = '{{timeOut}}';
+        document.getElementById("countDownSec").innerHTML = timeOut;
+		//let countDownSeconds = timeOut;
+        if (countDownTimer) {
+            clearInterval(countDownTimer);
+        }
+        countDownTimer = setInterval(function () {
+            document.getElementById("countDownSec").innerHTML = timeOut--;
+            if (timeOut <= 0) {
+                clearInterval(countDownTimer);
+				closeIt();
+            }
+        }, 1000);
+    };
+
+    if (timeOutFunction) {
+        clearTimeout(timeOutFunction);
+    }
+    setCountDown();
+    //Lock Function
+    function lockView() {
+        document.getElementById('unLock').style.display = "block";
+        document.getElementById('lock').style.display = "none";
+        document.getElementById('cvvUnlock').style.display = "block";
+        document.getElementById('cvvLock').style.display = "none";
+    }
+    //Un Lock Function
+    function unlockView() {
+        document.getElementById('unLock').style.display = "none";
+        document.getElementById('lock').style.display = "block";
+        document.getElementById('cvvUnlock').style.display = "none";
+        document.getElementById('cvvLock').style.display = "block";
+    }
+    //Copy Method
+    function copyTextFromElement(elementID) {
+        let element = document.getElementById(elementID); //select the element
+        let elementText = element.value; //get the text content from the element
+        console.log(elementText)
+        copyText(elementText); //use the copyText function below
+    }
+    //Copy Function
+    function copyText(text) {
+        navigator.clipboard.writeText(text);
+    }
+
+    //Close Function
+    function  closeIt() {
+        informParentToCloseWindow()
+		// if('{{callBackFlag}}' !== 'N'){
+        //         console.log("call back url disabled:::");
+        //         window.location.href='{{callbackUrl}}';
+        //     }else{
+        //         console.log("close event triggerd");
+        //         var xhttp = new XMLHttpRequest();
+        //         xhttp.open("GET", '{{callbackUrl}}', true);
+        //         xhttp.send();
+        //         window.location.reload();
+        //     }
+    }
+
+        document.getElementById('cvvLock').click(function () {
+        document.getElementById('unLock').style.display = "block";
+        document.getElementById('lock').style.display = "none";
+        //document.getElementById('lockView').style.display = "none";
+        //document.getElementById('unlockView').style.display = "block";
+        document.getElementById('cvvUnlock').style.display = "block";
+        document.getElementById('cvvLock').style.display = "none";
+    });
+
+</script>

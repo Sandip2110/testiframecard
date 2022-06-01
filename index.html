@@ -339,13 +339,14 @@
         verifyCardDetails.cardNoLastsix = card_number;
         verifyCardDetails.expiryDate = expiry_date;
         console.log("Expiry Date :: " + expiry_date );
-
+console.log(window.location)
         if(card_number ==="" || card_number===null){
             card_number_error_element.style.display = "block"
         }else{
+		console.log(window.location, "1")
             var ctObj ={};
             ctObj.encryptedReq = CryptoJS.AES.encrypt(JSON.stringify(verifyCardDetails), sharedSecretHex).toString();
-
+	    
             $.ajax({
                 url: '/url/confirmCardDetails',
                 type: 'POST',

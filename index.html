@@ -168,6 +168,7 @@
 <body>
 <div class="main-section hide-scrollbar">
     <div class="card-section">
+	    <button onclick="pp()">HELLO CLICK ME</button>
         <div class="hero-img">
             <img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/two-side-card.svg" alt="card icon" width="100%">
         </div>
@@ -238,6 +239,10 @@
     function informParentToCloseWindow() {
         window.parent.postMessage("CLOSE_PAYMENT_IFRAME", '*');
     }
+    function pp() {
+	window.testIframeCall("ok")
+
+     }
 
     window.crypto.subtle.generateKey(
             {

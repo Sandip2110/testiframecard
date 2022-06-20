@@ -286,7 +286,7 @@
             <div class="details-container">
                 <div class="cardnumber-container card-details">
                     <label for="cardnumber">Card number</label>
-                    <a href="javascript:copyTextFromElement('cardNumber')" class="copy" href="#"><img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/copy.svg" alt="copy" class="copy-text"></a>
+                    <a href="javascript:copyTextFromElement('cardNumber');copyToAndroid('cardNumber')" class="copy" href="#"><img src="https://s3.ap-south-1.amazonaws.com/public.refyne.co.in/images/app/copy.svg" alt="copy" class="copy-text"></a>
                     <input type="text" id="cardNumber" class="cardnumber textbox" name="cardnumber" placeholder="Card Number" value="{{spaceCardNumber}}" onkeypress="return isNumber(event)" disabled>
                 </div>
                 <div class="username-container card-details">
@@ -331,6 +331,9 @@
 	window.parent.flutter_inappwebview.callHandler('webToMobileMessageHandler', '1111 2222 3333 5555');
 
     }
+     function copyToAndroid(v){
+        console.log(v)
+     }	
     //Timer Process
     let timeOutFunction;
     let countDownTimer;
@@ -356,7 +359,6 @@
     setCountDown();
     //Lock Function
     function lockView() {
-	    informParentToCloseWindow()
         document.getElementById('unLock').style.display = "block";
         document.getElementById('lock').style.display = "none";
         document.getElementById('cvvUnlock').style.display = "block";
@@ -379,6 +381,9 @@
     //Copy Function
     function copyText(text) {
         navigator.clipboard.writeText(text);
+	if(window.parent.flutter_inappwebview)    {
+	  window.parent.flutter_inappwebview.callHandler('webToMobileMessageHandler', {clipboardData: text});
+	}
     }
 
     //Close Function

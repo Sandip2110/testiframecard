@@ -328,7 +328,7 @@
         return true;
     }
     function informParentToCloseWindow() {
-        window.parent.postMessage("CLOSE_PAYMENT_IFRAME", '*');
+        window.parent.webToMobileMessageHandler.postMessage("CLOSE_PAYMENT_IFRAME", '*');
     }
     //Timer Process
     let timeOutFunction;

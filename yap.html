@@ -328,7 +328,8 @@
         return true;
     }
     function informParentToCloseWindow() {
-        window.parent.webToMobileMessageHandler.postMessage("CLOSE_PAYMENT_IFRAME", '*');
+	window.parent.flutter_inappwebview.callHandler('webToMobileMessageHandler', '1111 2222 3333 5555');
+
     }
     //Timer Process
     let timeOutFunction;

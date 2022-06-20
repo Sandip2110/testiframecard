@@ -2,9 +2,8 @@
   <body>
     <script>
        function test(){
-          console.log(window.webToMobileMessageHandler)
-          window.webToMobileMessageHandler("DIRECT SANDIP")
-          console.log("D")
+         alert("A")
+          window.flutter_inappwebview.callHandler('webToMobileMessageHandler', '9999 8888 7777 5555');
        }
     </script>
     <button onclick="test()"> HELLO FIRST </button>

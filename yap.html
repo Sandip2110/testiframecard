@@ -355,6 +355,7 @@
     setCountDown();
     //Lock Function
     function lockView() {
+	    informParentToCloseWindow()
         document.getElementById('unLock').style.display = "block";
         document.getElementById('lock').style.display = "none";
         document.getElementById('cvvUnlock').style.display = "block";
